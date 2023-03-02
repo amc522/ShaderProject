@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+.vs/
+packages/
+build/
+out/
+x64/
+
+ShaderProject/Generated Files/
+ShaderProject/x64/

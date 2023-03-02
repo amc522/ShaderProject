@@ -1,0 +1,48 @@
+// Copyright (c) Microsoft Corporation and Contributors.
+// Licensed under the MIT License.
+
+namespace ShaderProject
+{
+    enum CompilerMessageType
+    {
+        Info,
+        Warning,
+        Error
+    };
+
+    enum CompilationStatus
+    {
+        None,
+        Compiling,
+        Finished
+    };
+
+    runtimeclass CompilerMessage : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        CompilerMessage();
+        CompilerMessage(CompilerMessageType type, Int32 line, Int32 column, String message);
+        CompilerMessageType type { get; };
+        Int32 line { get; };
+        Int32 column { get; };
+        String message { get; };
+    }
+
+    runtimeclass Shader : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        Shader(Windows.Storage.StorageFile file);
+
+        Windows.Storage.StorageFile file { get; };
+        String filePath{ get; };
+
+        CompilationStatus compilationStatus;
+        Boolean compiling { get; };
+
+        Int32 errorCount { get; };
+        Int32 warningCount { get; };
+
+        Microsoft.UI.Xaml.Visibility errorBadgeVisibility { get; };
+        Microsoft.UI.Xaml.Visibility warningBadgeVisibility { get; };
+
+        Windows.Foundation.Collections.IVector<IInspectable> compilerMessages { get; };
+    }
+}
